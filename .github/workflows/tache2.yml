@@ -21,10 +21,10 @@ jobs:
       - name: Tests des 2 classes
         run: >
           mvn -B -pl tika-core -am test
-          -Dtest='CharsetUtils*Test,FilenameUtils*Test'
+          -Dtest='CharsetUtils*Test,FilenameUtils*Test,EndianUtils*Test'
           -Dsurefire.failIfNoSpecifiedTests=false
 
-      # Score de mutation PIT (ChatUniTest n'est PAS lancé en CI : pas d'Ollama sur le runner)
+      # Score de mutation PIT (ChatUniTest n'est pas lancé en CI)
       - name: Mutation testing (PIT)
         run: >
           mvn -B -pl tika-core test-compile org.pitest:pitest-maven:mutationCoverage
