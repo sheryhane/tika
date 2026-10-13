@@ -17,14 +17,18 @@ jobs:
           java-version: '17'
           cache: maven
 
-      # Tests d'origine + tests générés (ChatUniTest) + tests manuels, sur les 2 classes
-      - name: Tests des 2 classes
+      # Tests d'origine + tests générés (ChatUniTest) + tests manuels, sur les 3 classes
+      - name: Tests des 3 classes
         run: >
           mvn -B -pl tika-core -am test
           -Dtest='CharsetUtils*Test,FilenameUtils*Test,EndianUtils*Test'
           -Dsurefire.failIfNoSpecifiedTests=false
 
-      # Score de mutation PIT (ChatUniTest n'est pas lancé en CI)
+      # "provided" de tika-core) doit donc être installé dans le dépôt Maven local du runner.
+      - name: Installer les modules dont tika-core dépend
+        run: >
+          mvn -B -pl tika-annotation-processor -am install -DskipTests
+
       - name: Mutation testing (PIT)
         run: >
           mvn -B -pl tika-core test-compile org.pitest:pitest-maven:mutationCoverage
