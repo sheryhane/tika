@@ -1,0 +1,29 @@
+{
+  "attempt0": {
+    "testClassName": "CharsetUtils_forName_3_0_Test",
+    "fullName": "org.apache.tika.utils.CharsetUtils_forName_3_0_Test",
+    "path": "/Users/mahaamhaouch/Documents/GitHub/tika/tika-core/chatunitest-tests/org/apache/tika/utils/CharsetUtils_forName_3_0_Test.java",
+    "className": "CharsetUtils",
+    "packageName": "org.apache.tika.utils",
+    "methodName": "forName",
+    "methodSig": "forName(String)"
+  },
+  "attempt1": {
+    "testClassName": "CharsetUtils_forName_3_1_Test",
+    "fullName": "org.apache.tika.utils.CharsetUtils_forName_3_1_Test",
+    "path": "/Users/mahaamhaouch/Documents/GitHub/tika/tika-core/chatunitest-tests/org/apache/tika/utils/CharsetUtils_forName_3_0_Test.java",
+    "className": "CharsetUtils",
+    "packageName": "org.apache.tika.utils",
+    "methodName": "forName",
+    "methodSig": "forName(String)"
+  },
+  "attempt2": {
+    "testClassName": "CharsetUtils_forName_3_2_Test",
+    "fullName": "org.apache.tika.utils.CharsetUtils_forName_3_2_Test",
+    "path": "/Users/mahaamhaouch/Documents/GitHub/tika/tika-core/chatunitest-tests/org/apache/tika/utils/CharsetUtils_forName_3_0_Test.java",
+    "className": "CharsetUtils",
+    "packageName": "org.apache.tika.utils",
+    "methodName": "forName",
+    "methodSig": "forName(String)"
+  }
+}

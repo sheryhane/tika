@@ -1,0 +1,116 @@
+package org.apache.tika.utils;
+
+import java.lang.reflect.Method;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import static java.util.Locale.ENGLISH;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.IllegalCharsetNameException;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.mockito.*;
+import org.junit.jupiter.api.*;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class CharsetUtils_forName_3_2_Test {
+
+    private CharsetUtils charsetUtils;
+
+    private Method getCharsetICU;
+
+    private Method isSupportedICU;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        charsetUtils = new CharsetUtils();
+        getCharsetICU = CharsetUtils.class.getDeclaredMethod("getCharsetICU");
+        isSupportedICU = CharsetUtils.class.getDeclaredMethod("isSupportedICU");
+        getCharsetICU.setAccessible(true);
+        isSupportedICU.setAccessible(true);
+    }
+
+    @Test
+    public void testForName_nullName() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            charsetUtils.forName(null);
+        });
+    }
+
+    @Test
+    public void testForName_invalidName() {
+        assertThrows(IllegalCharsetNameException.class, () -> {
+            charsetUtils.forName("invalidName");
+        });
+    }
+
+    @Test
+    public void testForName_validName() throws Exception {
+        Map<String, Charset> commonCharsets = new HashMap<>();
+        commonCharsets.put("utf-8", Charset.forName("UTF-8"));
+        CharsetUtils.COMMON_CHARSETS = commonCharsets;
+        Charset charset = charsetUtils.forName("UTF-8");
+        assertEquals(Charset.forName("UTF-8"), charset);
+    }
+
+    @Test
+    public void testForName_isoName() throws Exception {
+        Map<String, Charset> commonCharsets = new HashMap<>();
+        commonCharsets.put("iso-8859-1", Charset.forName("ISO-8859-1"));
+        CharsetUtils.COMMON_CHARSETS = commonCharsets;
+        Charset charset = charsetUtils.forName("iso 8859-1");
+        assertEquals(Charset.forName("ISO-8859-1"), charset);
+    }
+
+    @Test
+    public void testForName_cpName() throws Exception {
+        Map<String, Charset> commonCharsets = new HashMap<>();
+        commonCharsets.put("cp1252", Charset.forName("CP1252"));
+        CharsetUtils.COMMON_CHARSETS = commonCharsets;
+        Charset charset = charsetUtils.forName("cp-1252");
+        assertEquals(Charset.forName("CP1252"), charset);
+    }
+
+    @Test
+    public void testForName_winName() throws Exception {
+        Map<String, Charset> commonCharsets = new HashMap<>();
+        commonCharsets.put("windows-1252", Charset.forName("Windows-1252"));
+        CharsetUtils.COMMON_CHARSETS = commonCharsets;
+        Charset charset = charsetUtils.forName("win1252");
+        assertEquals(Charset.forName("Windows-1252"), charset);
+    }
+
+    @Test
+    public void testForName_icuCharset() throws Exception {
+        Map<String, Charset> commonCharsets = new HashMap<>();
+        commonCharsets.put("utf-8", Charset.forName("UTF-8"));
+        CharsetUtils.COMMON_CHARSETS = commonCharsets;
+        Method getCharsetICUMock = Mockito.mock(Method.class);
+        when(getCharsetICUMock.invoke(null, "UTF-8")).thenReturn(Charset.forName("UTF-8"));
+        when(getCharsetICU()).thenReturn(getCharsetICUMock);
+        Charset charset = charsetUtils.forName("UTF-8");
+        assertEquals(Charset.forName("UTF-8"), charset);
+    }
+}
+
+--------------------------------------------
+Error in CharsetUtils_forName_3_2_Test: line -1 : Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+Error in CharsetUtils_forName_3_2_Test: line -1 : Supported source version 'RELEASE_17' from annotation processor 'org.apache.tika.annotation.TikaComponentProcessor' less than -source '22'
+Error in CharsetUtils_forName_3_2_Test: line 55 : COMMON_CHARSETS has private access in org.apache.tika.utils.CharsetUtils
+Error in CharsetUtils_forName_3_2_Test: line 64 : COMMON_CHARSETS has private access in org.apache.tika.utils.CharsetUtils
+Error in CharsetUtils_forName_3_2_Test: line 73 : COMMON_CHARSETS has private access in org.apache.tika.utils.CharsetUtils
+Error in CharsetUtils_forName_3_2_Test: line 82 : COMMON_CHARSETS has private access in org.apache.tika.utils.CharsetUtils
+Error in CharsetUtils_forName_3_2_Test: line 91 : COMMON_CHARSETS has private access in org.apache.tika.utils.CharsetUtils
+Error in CharsetUtils_forName_3_2_Test: line 94 : cannot find symbol
+  symbol:   method getCharsetICU()
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_2_Test
