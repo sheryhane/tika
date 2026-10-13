@@ -1,0 +1,39 @@
+name: Tache 2 - tests tika-core
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests-tika-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      # Tests d'origine + tests générés (ChatUniTest) + tests manuels, sur les 2 classes
+      - name: Tests des 2 classes
+        run: >
+          mvn -B -pl tika-core -am test
+          -Dtest='CharsetUtils*Test,FilenameUtils*Test'
+          -Dsurefire.failIfNoSpecifiedTests=false
+
+      # Score de mutation PIT (ChatUniTest n'est PAS lancé en CI : pas d'Ollama sur le runner)
+      - name: Mutation testing (PIT)
+        run: >
+          mvn -B -pl tika-core test-compile org.pitest:pitest-maven:mutationCoverage
+          -Djacoco.skip=true
+
+      - name: Rapport PIT
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pit-report
+          path: tika-core/target/pit-reports
+          if-no-files-found: warn

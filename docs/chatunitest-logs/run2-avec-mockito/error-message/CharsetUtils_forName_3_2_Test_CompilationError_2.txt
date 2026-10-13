@@ -1,0 +1,121 @@
+package org.apache.tika.utils;
+
+import java.lang.reflect.Method;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import static java.util.Locale.ENGLISH;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.IllegalCharsetNameException;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.mockito.*;
+import org.junit.jupiter.api.*;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+public class CharsetUtils_forName_3_2_Test {
+
+    @Mock
+    private static Method getCharsetICU;
+
+    @Mock
+    private static Method isSupportedICU;
+
+    private CharsetUtils charsetUtils;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        charsetUtils = new CharsetUtils();
+        commonCharsets = new HashMap<>();
+        commonCharsets.put("utf-8", Charset.forName("UTF-8"));
+        commonCharsets.put("iso-8859-1", Charset.forName("ISO-8859-1"));
+    }
+
+    @Test
+    public void testForName_withNullName() {
+        assertThrows(IllegalArgumentException.class, () -> charsetUtils.forName(null));
+    }
+
+    @Test
+    public void testForName_withValidName() throws Exception {
+        when(getCharsetICU.invoke(null, "UTF-8")).thenReturn(null);
+        Charset charset = charsetUtils.forName("UTF-8");
+        assertEquals(Charset.forName("UTF-8"), charset);
+    }
+
+    @Test
+    public void testForName_withInvalidName() {
+        assertThrows(IllegalCharsetNameException.class, () -> charsetUtils.forName("invalid-name"));
+    }
+
+    @Test
+    public void testForName_withISOName() throws Exception {
+        when(getCharsetICU.invoke(null, "iso-8859-1")).thenReturn(null);
+        Charset charset = charsetUtils.forName("iso 8859-1");
+        assertEquals(Charset.forName("ISO-8859-1"), charset);
+    }
+
+    @Test
+    public void testForName_withCPName() throws Exception {
+        when(getCharsetICU.invoke(null, "cp1252")).thenReturn(null);
+        Charset charset = charsetUtils.forName("cp-1252");
+        assertEquals(Charset.forName("cp1252"), charset);
+    }
+
+    @Test
+    public void testForName_withWinName() throws Exception {
+        when(getCharsetICU.invoke(null, "windows-1252")).thenReturn(null);
+        Charset charset = charsetUtils.forName("win-1252");
+        assertEquals(Charset.forName("windows-1252"), charset);
+    }
+
+    @Test
+    public void testForName_withNoneName() {
+        assertThrows(IllegalCharsetNameException.class, () -> charsetUtils.forName("none"));
+    }
+
+    @Test
+    public void testForName_withNoName() {
+        assertThrows(IllegalCharsetNameException.class, () -> charsetUtils.forName("no"));
+    }
+
+    @Test
+    public void testForName_withICUCharset() throws Exception {
+        when(getCharsetICU.invoke(null, "UTF-8")).thenReturn(Charset.forName("UTF-8"));
+        Charset charset = charsetUtils.forName("UTF-8");
+        assertEquals(Charset.forName("UTF-8"), charset);
+    }
+
+    @Test
+    public void testForName_withICUUnsupportedCharset() throws Exception {
+        when(getCharsetICU.invoke(null, "invalid-name")).thenReturn(null);
+        when(isSupportedICU.invoke(null, "invalid-name")).thenReturn(false);
+        assertThrows(IllegalCharsetNameException.class, () -> charsetUtils.forName("invalid-name"));
+    }
+}
+
+--------------------------------------------
+Error in CharsetUtils_forName_3_2_Test: line -1 : Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+Error in CharsetUtils_forName_3_2_Test: line -1 : Supported source version 'RELEASE_17' from annotation processor 'org.apache.tika.annotation.TikaComponentProcessor' less than -source '22'
+Error in CharsetUtils_forName_3_2_Test: line 8 : package org.mockito.junit.jupiter does not exist
+Error in CharsetUtils_forName_3_2_Test: line 17 : package org.mockito does not exist
+Error in CharsetUtils_forName_3_2_Test: line 15 : package org.mockito does not exist
+Error in CharsetUtils_forName_3_2_Test: line 20 : cannot find symbol
+  symbol: class MockitoExtension
+Error in CharsetUtils_forName_3_2_Test: line 23 : cannot find symbol
+  symbol:   class Mock
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_2_Test
+Error in CharsetUtils_forName_3_2_Test: line 26 : cannot find symbol
+  symbol:   class Mock
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_2_Test

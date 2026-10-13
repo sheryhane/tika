@@ -1,0 +1,101 @@
+package org.apache.tika.utils;
+
+import java.lang.reflect.Method;
+import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import static java.util.Locale.ENGLISH;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import org.mockito.*;
+import org.junit.jupiter.api.*;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class CharsetUtils_forName_3_0_Test {
+
+    private CharsetUtils charsetUtils;
+
+    private Map<String, Charset> commonCharsets;
+
+    private Method getCharsetICU;
+
+    private Method isSupportedICU;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        charsetUtils = new CharsetUtils();
+        commonCharsets = new HashMap<>();
+        commonCharsets.put("utf-8", Charset.forName("UTF-8"));
+        commonCharsets.put("iso-8859-1", Charset.forName("ISO-8859-1"));
+        commonCharsets.put("cp1252", Charset.forName("CP1252"));
+        commonCharsets.put("windows-1252", Charset.forName("Windows-1252"));
+        getCharsetICU = CharsetUtils.class.getDeclaredMethod("getCharsetICU");
+        isSupportedICU = CharsetUtils.class.getDeclaredMethod("isSupportedICU");
+        getCharsetICU.setAccessible(true);
+        isSupportedICU.setAccessible(true);
+    }
+
+    @Test
+    public void testForName_withCPName() throws Exception {
+        when(getCharsetICU.invoke(null, "cp1252")).thenReturn(Charset.forName("CP1252"));
+        Charset charset = charsetUtils.forName("cp1252");
+        assertEquals(Charset.forName("CP1252"), charset);
+    }
+
+    @Test
+    public void testForName_withNoName() {
+        assertThrows(IllegalArgumentException.class, () -> charsetUtils.forName(null));
+    }
+
+    @Test
+    public void testForName_withNullName() {
+        assertThrows(IllegalArgumentException.class, () -> charsetUtils.forName(null));
+    }
+
+    @Test
+    public void testForName_withValidName() throws Exception {
+        when(getCharsetICU.invoke(null, "utf-8")).thenReturn(Charset.forName("UTF-8"));
+        Charset charset = charsetUtils.forName("utf-8");
+        assertEquals(Charset.forName("UTF-8"), charset);
+    }
+
+    @Test
+    public void testForName_withInvalidName() {
+        assertThrows(IllegalCharsetNameException.class, () -> charsetUtils.forName("invalid"));
+    }
+
+    @Test
+    public void testForName_withISOName() throws Exception {
+        when(getCharsetICU.invoke(null, "iso-8859-1")).thenReturn(Charset.forName("ISO-8859-1"));
+        Charset charset = charsetUtils.forName("iso-8859-1");
+        assertEquals(Charset.forName("ISO-8859-1"), charset);
+    }
+
+    @Test
+    public void testForName_withWinName() throws Exception {
+        when(getCharsetICU.invoke(null, "windows-1252")).thenReturn(Charset.forName("Windows-1252"));
+        Charset charset = charsetUtils.forName("windows-1252");
+        assertEquals(Charset.forName("Windows-1252"), charset);
+    }
+
+    @Test
+    public void testForName_withNoneName() {
+        assertThrows(IllegalCharsetNameException.class, () -> charsetUtils.forName("none"));
+    }
+}
+
+--------------------------------------------
+Error in testForName_withCPName(): line 38 : java.lang.NoSuchMethodException: org.apache.tika.utils.CharsetUtils.getCharsetICU()
+Error in testForName_withNoName(): line 38 : java.lang.NoSuchMethodException: org.apache.tika.utils.CharsetUtils.getCharsetICU()
+Error in testForName_withNullName(): line 38 : java.lang.NoSuchMethodException: org.apache.tika.utils.CharsetUtils.getCharsetICU()
+Error in testForName_withValidName(): line 38 : java.lang.NoSuchMethodException: org.apache.tika.utils.CharsetUtils.getCharsetICU()
+Error in testForName_withInvalidName(): line 38 : java.lang.NoSuchMethodException: org.apache.tika.utils.CharsetUtils.getCharsetICU()
+Error in testForName_withISOName(): line 38 : java.lang.NoSuchMethodException: org.apache.tika.utils.CharsetUtils.getCharsetICU()
+Error in testForName_withWinName(): line 38 : java.lang.NoSuchMethodException: org.apache.tika.utils.CharsetUtils.getCharsetICU()
+Error in testForName_withNoneName(): line 38 : java.lang.NoSuchMethodException: org.apache.tika.utils.CharsetUtils.getCharsetICU()

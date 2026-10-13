@@ -1,0 +1,157 @@
+package org.apache.tika.utils;
+
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import java.lang.reflect.Method;
+import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import org.mockito.*;
+import org.junit.jupiter.api.*;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static java.util.Locale.ENGLISH;
+import java.lang.reflect.InvocationTargetException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+@ExtendWith(MockitoExtension.class)
+public class CharsetUtils_forName_3_1_Test {
+
+    @Mock
+    private Method getCharsetICU;
+
+    @Mock
+    private Method isSupportedICU;
+
+    private CharsetUtils charsetUtils;
+
+    @BeforeEach
+    public void setUp() throws NoSuchMethodException {
+        charsetUtils = new CharsetUtils();
+        Method getCharsetICUMethod = CharsetUtils.class.getDeclaredMethod("getCharsetICU");
+        getCharsetICUMethod.setAccessible(true);
+        when(getCharsetICUMethod.invoke(charsetUtils)).thenReturn(getCharsetICU);
+        Method isSupportedICUMethod = CharsetUtils.class.getDeclaredMethod("isSupportedICU");
+        isSupportedICUMethod.setAccessible(true);
+        when(isSupportedICUMethod.invoke(charsetUtils)).thenReturn(isSupportedICU);
+    }
+
+    @Test
+    public void testForName_withNullName() {
+        assertThrows(IllegalArgumentException.class, () -> charsetUtils.forName(null));
+    }
+
+    @Test
+    public void testForName_withValidName() throws Exception {
+        String name = "UTF-8";
+        Charset expectedCharset = Charset.forName(name);
+        when(COMMON_CHARSETS.get(name.toLowerCase(Locale.ENGLISH))).thenReturn(expectedCharset);
+        Charset result = charsetUtils.forName(name);
+        assertEquals(expectedCharset, result);
+        verify(COMMON_CHARSETS, times(1)).get(name.toLowerCase(Locale.ENGLISH));
+        verify(getCharsetICU, never()).invoke(any(), any());
+    }
+
+    @Test
+    public void testForName_withInvalidName() {
+        String name = "INVALID";
+        assertThrows(IllegalCharsetNameException.class, () -> charsetUtils.forName(name));
+    }
+
+    @Test
+    public void testForName_withISOName() throws Exception {
+        String name = "ISO 8859-1";
+        Charset expectedCharset = Charset.forName("iso-8859-1");
+        when(COMMON_CHARSETS.get("iso-8859-1")).thenReturn(expectedCharset);
+        Charset result = charsetUtils.forName(name);
+        assertEquals(expectedCharset, result);
+        verify(COMMON_CHARSETS, times(1)).get("iso-8859-1");
+        verify(getCharsetICU, never()).invoke(any(), any());
+    }
+
+    @Test
+    public void testForName_withCPName() throws Exception {
+        String name = "CP1252";
+        Charset expectedCharset = Charset.forName("cp1252");
+        when(COMMON_CHARSETS.get("cp1252")).thenReturn(expectedCharset);
+        Charset result = charsetUtils.forName(name);
+        assertEquals(expectedCharset, result);
+        verify(COMMON_CHARSETS, times(1)).get("cp1252");
+        verify(getCharsetICU, never()).invoke(any(), any());
+    }
+
+    @Test
+    public void testForName_withWINName() throws Exception {
+        String name = "WIN1252";
+        Charset expectedCharset = Charset.forName("windows-1252");
+        when(COMMON_CHARSETS.get("windows-1252")).thenReturn(expectedCharset);
+        Charset result = charsetUtils.forName(name);
+        assertEquals(expectedCharset, result);
+        verify(COMMON_CHARSETS, times(1)).get("windows-1252");
+        verify(getCharsetICU, never()).invoke(any(), any());
+    }
+
+    @Test
+    public void testForName_withICUCharset() throws Exception {
+        String name = "UTF-8";
+        Charset expectedCharset = Charset.forName(name);
+        when(getCharsetICU.invoke(null, name)).thenReturn(expectedCharset);
+        Charset result = charsetUtils.forName(name);
+        assertEquals(expectedCharset, result);
+        verify(COMMON_CHARSETS, never()).get(any());
+        verify(getCharsetICU, times(1)).invoke(null, name);
+    }
+
+    @Test
+    public void testForName_withUnsupportedICUCharset() throws Exception {
+        String name = "UTF-8";
+        when(getCharsetICU.invoke(null, name)).thenReturn(null);
+        Charset result = charsetUtils.forName(name);
+        assertEquals(Charset.forName(name), result);
+        verify(COMMON_CHARSETS, never()).get(any());
+        verify(getCharsetICU, times(1)).invoke(null, name);
+    }
+}
+
+--------------------------------------------
+Error in CharsetUtils_forName_3_1_Test: line -1 : Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+Error in CharsetUtils_forName_3_1_Test: line -1 : Supported source version 'RELEASE_17' from annotation processor 'org.apache.tika.annotation.TikaComponentProcessor' less than -source '22'
+Error in CharsetUtils_forName_3_1_Test: line 51 : cannot find symbol
+  symbol:   variable COMMON_CHARSETS
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_1_Test
+Error in CharsetUtils_forName_3_1_Test: line 54 : cannot find symbol
+  symbol:   variable COMMON_CHARSETS
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_1_Test
+Error in CharsetUtils_forName_3_1_Test: line 68 : cannot find symbol
+  symbol:   variable COMMON_CHARSETS
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_1_Test
+Error in CharsetUtils_forName_3_1_Test: line 71 : cannot find symbol
+  symbol:   variable COMMON_CHARSETS
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_1_Test
+Error in CharsetUtils_forName_3_1_Test: line 79 : cannot find symbol
+  symbol:   variable COMMON_CHARSETS
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_1_Test
+Error in CharsetUtils_forName_3_1_Test: line 82 : cannot find symbol
+  symbol:   variable COMMON_CHARSETS
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_1_Test
+Error in CharsetUtils_forName_3_1_Test: line 90 : cannot find symbol
+  symbol:   variable COMMON_CHARSETS
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_1_Test
+Error in CharsetUtils_forName_3_1_Test: line 93 : cannot find symbol
+  symbol:   variable COMMON_CHARSETS
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_1_Test
+Error in CharsetUtils_forName_3_1_Test: line 104 : cannot find symbol
+  symbol:   variable COMMON_CHARSETS
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_1_Test
+Error in CharsetUtils_forName_3_1_Test: line 114 : cannot find symbol
+  symbol:   variable COMMON_CHARSETS
+  location: class org.apache.tika.utils.CharsetUtils_forName_3_1_Test

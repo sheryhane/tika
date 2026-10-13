@@ -25,3 +25,4 @@ tika-grpc/ignite
 # Python bytecode (e.g. from .skills scripts)
 __pycache__/
 *.pyc
+.vscode/
