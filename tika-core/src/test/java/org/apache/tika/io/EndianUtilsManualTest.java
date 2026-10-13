@@ -38,8 +38,7 @@ public class EndianUtilsManualTest {
         return new ByteArrayInputStream(bytes(values));
     }
 
-    // ---------- lectures 16 bits depuis un flux ----------
-
+    
     @Test
     public void testReadShortBE() throws Exception {
         assertEquals(258, EndianUtils.readShortBE(stream(0x01, 0x02)));
@@ -77,7 +76,6 @@ public class EndianUtilsManualTest {
                 () -> EndianUtils.readUShortLE(stream()));
     }
 
-    // ---------- lectures 32 bits depuis un flux ----------
 
     @Test
     public void testReadUIntLE() throws Exception {
@@ -109,7 +107,6 @@ public class EndianUtilsManualTest {
 
     @Test
     public void testReadIntME() throws Exception {
-        // (ch2 << 24) + (ch1 << 16) + (ch4 << 8) + ch3 = 0x02010403
         assertEquals(0x02010403, EndianUtils.readIntME(stream(1, 2, 3, 4)));
         assertEquals(0, EndianUtils.readIntME(stream(0, 0, 0, 0)));
     }
@@ -128,7 +125,7 @@ public class EndianUtilsManualTest {
                 () -> EndianUtils.readIntME(stream(1, 2, 3)));
     }
 
-    // ---------- lectures 64 bits depuis un flux ----------
+   
 
     @Test
     public void testReadLongLE() throws Exception {
@@ -136,7 +133,7 @@ public class EndianUtilsManualTest {
                 EndianUtils.readLongLE(stream(1, 2, 3, 4, 5, 6, 7, 8)));
         assertEquals(-1L,
                 EndianUtils.readLongLE(stream(255, 255, 255, 255, 255, 255, 255, 255)));
-        // le bit 31 (octet 4 = 0x80) doit rester positif dans un long
+       
         assertEquals(0x80000000L, EndianUtils.readLongLE(stream(0, 0, 0, 0x80, 0, 0, 0, 0)));
         assertEquals(0L, EndianUtils.readLongLE(stream(0, 0, 0, 0, 0, 0, 0, 0)));
     }
@@ -159,7 +156,7 @@ public class EndianUtilsManualTest {
                 () -> EndianUtils.readLongBE(stream(1, 2, 3, 4, 5, 6, 7)));
     }
 
-    // ---------- readUE7 ----------
+    //readUE7
 
     @Test
     public void testReadUE7() throws Exception {
@@ -175,7 +172,7 @@ public class EndianUtilsManualTest {
         assertThrows(IOException.class, () -> EndianUtils.readUE7(stream(0x81)));
     }
 
-    // ---------- lectures depuis un tableau d'octets ----------
+    // lectures d'un tableau d'octet
 
     @Test
     public void testGetShort() {
@@ -213,7 +210,6 @@ public class EndianUtilsManualTest {
         assertEquals(67305985L, EndianUtils.getUIntLE(bytes(0xAA, 1, 2, 3, 4), 1));
         assertEquals(16909060L, EndianUtils.getUIntBE(bytes(1, 2, 3, 4)));
         assertEquals(16909060L, EndianUtils.getUIntBE(bytes(0xAA, 1, 2, 3, 4), 1));
-        // bit de signe : getInt est négatif, getUInt reste positif
         assertEquals(Integer.MIN_VALUE, EndianUtils.getIntLE(bytes(0, 0, 0, 0x80)));
         assertEquals(2147483648L, EndianUtils.getUIntLE(bytes(0, 0, 0, 0x80)));
         assertEquals(2147483648L, EndianUtils.getUIntBE(bytes(0x80, 0, 0, 0)));

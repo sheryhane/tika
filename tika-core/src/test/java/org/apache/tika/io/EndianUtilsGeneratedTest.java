@@ -28,7 +28,6 @@ public class EndianUtilsGeneratedTest {
 
     @Test
     public void testReadShortLE() throws Exception {
-        // bytes 01 02 in little-endian = 0x0201 = 513
         ByteArrayInputStream in = new ByteArrayInputStream(new byte[]{0x01, 0x02});
         assertEquals(513, EndianUtils.readShortLE(in));
     }
@@ -42,14 +41,12 @@ public class EndianUtilsGeneratedTest {
 
     @Test
     public void testReadUShortLE() throws Exception {
-        // bytes 01 02 in little-endian = 513
         ByteArrayInputStream in = new ByteArrayInputStream(new byte[]{0x01, 0x02});
         assertEquals(513, EndianUtils.readUShortLE(in));
     }
 
     @Test
     public void testReadUShortLEUnsigned() throws Exception {
-        // bytes FF FF: unsigned = 65535 (a signed read would give -1)
         ByteArrayInputStream in =
                 new ByteArrayInputStream(new byte[]{(byte) 0xFF, (byte) 0xFF});
         assertEquals(65535, EndianUtils.readUShortLE(in));
