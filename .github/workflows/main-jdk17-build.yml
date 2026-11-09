@@ -23,12 +23,38 @@ on:
     paths-ignore:
       - 'docs/**'
   push:
-    branches: [ main ]
+    branches: [ main . tache3]
     paths-ignore:
       - 'docs/**'
 
 jobs:
+  semgrep:
+    name: Semgrep, nouvelles vulnérabilités
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0                # l'historique
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Installer Semgrep
+        run: pip install semgrep
+      - name: Semgrep - échoue si une nouvelle vulnérabilité est introduite
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          # premier push d'une nouvelle branche : pas de "before", on prend le commit parent
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            BASE_SHA=$(git rev-parse HEAD~1)
+          fi
+          echo "Commit de référence : $BASE_SHA"
+          semgrep scan --config p/java --error --baseline-commit "$BASE_SHA"
+
   build:
+  # s'assurer que semgrep success en 1er
+    needs:semgrep 
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:
