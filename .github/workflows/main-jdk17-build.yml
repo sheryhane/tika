@@ -23,7 +23,7 @@ on:
     paths-ignore:
       - 'docs/**'
   push:
-    branches: [ main . tache3]
+    branches: [ main , tache3 ]
     paths-ignore:
       - 'docs/**'
 

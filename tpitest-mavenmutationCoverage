@@ -1,0 +1,34 @@
+[1mdiff --git a/tika-core/pom.xml b/tika-core/pom.xml[m
+[1mindex dfc908851..e20605f06 100644[m
+[1m--- a/tika-core/pom.xml[m
+[1m+++ b/tika-core/pom.xml[m
+[36m@@ -288,8 +288,28 @@[m
+               <goal>single</goal>[m
+             </goals>[m
+           </execution>[m
+[31m-        </executions>[m
+[32m+[m[32m        </executions>[m[41m   [m
+       </plugin>[m
+[32m+[m[32m      <plugin>[m
+[32m+[m	[32m  <groupId>org.pitest</groupId>[m
+[32m+[m	[32m  <artifactId>pitest-maven</artifactId>[m
+[32m+[m	[32m  <version>1.19.5</version>[m
+[32m+[m	[32m  <configuration>[m
+[32m+[m	[32m      <targetClasses>[m
+[32m+[m	[41m     [m	[32m <param>org.apache.tika.io.EndianUtils</param>[m
+[32m+[m		[32m <param>org.apache.tika.mime.Patterns</param>[m
+[32m+[m		[32m <param>org.apache.tika.utils.ConcurrentUtils</param>[m
+[32m+[m	[32m      </targetClasses>[m
+[32m+[m	[32m  </configuration>[m
+[32m+[m[32m          <dependencies>[m
+[32m+[m[41m   [m	[32m     <dependency>[m
+[32m+[m[41m       [m		[32m <groupId>org.pitest</groupId>[m
+[32m+[m[41m      [m	[32m         <artifactId>pitest-junit5-plugin</artifactId>[m
+[32m+[m[41m     [m	[32m         <version>1.2.3</version>[m
+[32m+[m[41m   [m	[32m     </dependency>[m
+[32m+[m	[32m  </dependencies>[m
+[32m+[m[32m       </plugin>[m
+[32m+[m
+     </plugins>[m
+   </build>[m
+   <reporting>[m

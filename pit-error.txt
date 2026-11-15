@@ -1,0 +1,352 @@
+[INFO] Loaded 24069 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] Error stacktraces are turned on.
+[INFO] Maveniverse Nisse 0.9.4 loaded
+[INFO] Nisse injecting 32 properties into User Properties
+[INFO] Scanning for projects...
+[INFO] Loaded 24069 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.apache.tika:tika-parent:pom:4.0.0-SNAPSHOT
+[WARNING] 'version' contains an expression but should be a constant. @ org.apache.tika:tika-parent:${revision}, C:\Users\HP\Documents\GitHub\tika\tika-parent\pom.xml, line 34, column 12
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.apache.tika:tika:pom:4.0.0-SNAPSHOT
+[WARNING] 'version' contains an expression but should be a constant. @ org.apache.tika:tika-parent:${revision}, C:\Users\HP\Documents\GitHub\tika\tika-parent\pom.xml, line 34, column 12
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] No need for inlining
+[INFO] 
+[INFO] ---------------------< org.apache.tika:tika-core >----------------------
+[INFO] Building Apache Tika core 4.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] -------------------------------[ bundle ]-------------------------------
+[INFO] 
+[INFO] --- pitest:1.19.5:mutationCoverage (default-cli) @ tika-core ---
+[INFO] Loaded 50 auto-discovered prefixes for remote repository ow2-snapshot (prefixes-ow2-snapshot.txt)
+[INFO] Root dir is : C:\Users\HP\Documents\GitHub\tika
+[INFO] Found plugin : Default csv report plugin
+[INFO] Found plugin : Default xml report plugin
+[INFO] Found plugin : Default html report plugin
+[INFO] Found plugin : Static initializer code detector plugin
+[INFO] Found plugin : Excluded annotations plugin
+[INFO] Found plugin : Try with resources filter
+[INFO] Found plugin : Inlined finally block filter plugin
+[INFO] Found plugin : Implicit null check filter
+[INFO] Found plugin : Method reference null check filter
+[INFO] Found plugin : For each loop filter
+[INFO] Found plugin : Enum junk filter
+[INFO] Found plugin : Record junk mutation filter
+[INFO] Found plugin : String switch filter
+[INFO] Found plugin : Assertions filter
+[INFO] Found plugin : Enum switch filter
+[INFO] Found plugin : Logging calls filter
+[INFO] Found plugin : Infinite for loop filter
+[INFO] Found plugin : Long running iterator loop filter
+[INFO] Found plugin : For loop counter filter
+[INFO] Found plugin : Kotlin junk mutations filter
+[INFO] Found plugin : Groovy junk mutations filter
+[INFO] Found plugin : Max mutations per class limit
+[INFO] Found plugin : Equals shortcut equivalent mutant filter
+[INFO] Found plugin : Trivial return vals equivalence filter
+[INFO] Found plugin : Filters mutants with line number <= 1
+[INFO] Found plugin : Division by one equivalent mutant filter
+[INFO] Found plugin : Lombok junk mutations filter
+[INFO] Found plugin : Filter mutations to defensive wrappers such as unmodifiableCollection on return or field write
+[INFO] Found plugin : Mutant export plugin
+[INFO] Found plugin : Auto add java.awt.headless=true to keep keyboard focus on Mac OS
+[INFO] Found plugin : Auto set number of threads based on machine
+[INFO] Found plugin : Automatically add -ea to launch args to enable assertions
+[INFO] Found plugin : Default build verifier
+[INFO] Found plugin : Detect missing JUnit5 plugin
+[INFO] Found plugin : Detect missing TestNG plugin
+[INFO] Found plugin : Detect missing kotlin plugin
+[INFO] Found plugin : Detect missing spring plugin
+[INFO] Found plugin : Default coverage exporter
+[INFO] Found shared classpath plugin : Default mutation engine
+[INFO] Found shared classpath plugin : JUnit plugin
+[INFO] Found shared classpath plugin : Support for mocking frameworks using javassist
+[INFO] Found shared classpath plugin : Reset environment for javassist
+[INFO] Available mutators : EXPERIMENTAL_ARGUMENT_PROPAGATION,FALSE_RETURNS,TRUE_RETURNS,CONDITIONALS_BOUNDARY,CONSTRUCTOR_CALLS,EMPTY_RETURNS,INCREMENTS,INLINE_CONSTS,INVERT_NEGS,MATH,NEGATE_CONDITIONALS,NON_VOID_METHOD_CALLS,NULL_RETURNS,PRIMITIVE_RETURNS,REMOVE_CONDITIONALS_EQUAL_IF,REMOVE_CONDITIONALS_EQUAL_ELSE,REMOVE_CONDITIONALS_ORDER_IF,REMOVE_CONDITIONALS_ORDER_ELSE,VOID_METHOD_CALLS,EXPERIMENTAL_BIG_DECIMAL,EXPERIMENTAL_BIG_INTEGER,EXPERIMENTAL_MEMBER_VARIABLE,EXPERIMENTAL_NAKED_RECEIVER,REMOVE_INCREMENTS,EXPERIMENTAL_SWITCH
+[INFO] Adding org.pitest:pitest to SUT classpath
+[INFO] Auto adding org.junit.platform:junit-platform-launcher:jar:6.1.3 < central (https://repo.maven.apache.org/maven2, default, releases) to classpath.
+[INFO] Mutating from C:\Users\HP\Documents\GitHub\tika\tika-core\target\classes
+[INFO] Defaulting target tests to match packages in test build directory
+[INFO] Replacing properties in argLine -Xmx4g -Djava.awt.headless=true @{surefireArgLine}
+11:21:41 PIT >> WARNING : JUnit 5 is on the classpath but the pitest junit 5 plugin is not installed.
+11:21:41 PIT >> INFO : Verbose logging is disabled. If you encounter a problem, please enable it before reporting an issue.
+11:21:41 PIT >> INFO : Created 3 mutation test units in pre scan
+11:21:41 PIT >> INFO : Sending 375 test classes to minion
+11:21:41 PIT >> INFO : Sent tests to minion
+11:21:41 PIT >> SEVERE : Pitest could not run any tests. Please check that you have installed the pitest plugin for your testing library (eg JUnit 5, TestNG). If your project uses JUnit 4 the plugin is automatically included, but a recent version of JUnit 4 must be on the classpath.
+[INFO] ------------------------------------------------------------------------
+[ERROR] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.806 s
+[INFO] Finished at: 2026-10-13T11:21:41-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.pitest:pitest-maven:1.19.5:mutationCoverage (default-cli) on project tika-core: Execution default-cli of goal org.pitest:pitest-maven:1.19.5:mutationCoverage failed: Please check you have correctly installed the pitest plugin for your project's test library (JUnit 5, TestNG, JUnit 4 etc). 
+[ERROR] 
+[ERROR] Please copy and paste the information and the complete stacktrace below when reporting an issue
+[ERROR] VM : OpenJDK 64-Bit Server VM
+[ERROR] Vendor : Eclipse Adoptium
+[ERROR] Version : 25.0.4.1+1-LTS
+[ERROR] Uptime : 7952
+[ERROR] Input -> 
+[ERROR]  1 : --enable-native-access=ALL-UNNAMED
+[ERROR]  2 : -Dclassworlds.conf=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\bin\m2.conf
+[ERROR]  3 : -Dmaven.home=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0
+[ERROR]  4 : -Dlibrary.jline.path=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\lib\jline-native
+[ERROR]  5 : -Dorg.jline.terminal.exec.redirectPipeCreationMode=native,reflection
+[ERROR]  6 : -Dmaven.multiModuleProjectDirectory=C:\Users\HP\Documents\GitHub\tika
+[ERROR] BootClassPathSupported : false
+[ERROR] 
+[ERROR] 
+[ERROR] Please copy and paste the information and the complete stacktrace below when reporting an issue
+[ERROR] VM : OpenJDK 64-Bit Server VM
+[ERROR] Vendor : Eclipse Adoptium
+[ERROR] Version : 25.0.4.1+1-LTS
+[ERROR] Uptime : 7955
+[ERROR] Input -> 
+[ERROR]  1 : --enable-native-access=ALL-UNNAMED
+[ERROR]  2 : -Dclassworlds.conf=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\bin\m2.conf
+[ERROR]  3 : -Dmaven.home=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0
+[ERROR]  4 : -Dlibrary.jline.path=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\lib\jline-native
+[ERROR]  5 : -Dorg.jline.terminal.exec.redirectPipeCreationMode=native,reflection
+[ERROR]  6 : -Dmaven.multiModuleProjectDirectory=C:\Users\HP\Documents\GitHub\tika
+[ERROR] BootClassPathSupported : false
+[ERROR] -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.pitest:pitest-maven:1.19.5:mutationCoverage (default-cli) on project tika-core: Execution default-cli of goal org.pitest:pitest-maven:1.19.5:mutationCoverage failed: Please check you have correctly installed the pitest plugin for your project's test library (JUnit 5, TestNG, JUnit 4 etc). 
+
+Please copy and paste the information and the complete stacktrace below when reporting an issue
+VM : OpenJDK 64-Bit Server VM
+Vendor : Eclipse Adoptium
+Version : 25.0.4.1+1-LTS
+Uptime : 7952
+Input -> 
+ 1 : --enable-native-access=ALL-UNNAMED
+ 2 : -Dclassworlds.conf=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\bin\m2.conf
+ 3 : -Dmaven.home=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0
+ 4 : -Dlibrary.jline.path=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\lib\jline-native
+ 5 : -Dorg.jline.terminal.exec.redirectPipeCreationMode=native,reflection
+ 6 : -Dmaven.multiModuleProjectDirectory=C:\Users\HP\Documents\GitHub\tika
+BootClassPathSupported : false
+
+
+Please copy and paste the information and the complete stacktrace below when reporting an issue
+VM : OpenJDK 64-Bit Server VM
+Vendor : Eclipse Adoptium
+Version : 25.0.4.1+1-LTS
+Uptime : 7955
+Input -> 
+ 1 : --enable-native-access=ALL-UNNAMED
+ 2 : -Dclassworlds.conf=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\bin\m2.conf
+ 3 : -Dmaven.home=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0
+ 4 : -Dlibrary.jline.path=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\lib\jline-native
+ 5 : -Dorg.jline.terminal.exec.redirectPipeCreationMode=native,reflection
+ 6 : -Dmaven.multiModuleProjectDirectory=C:\Users\HP\Documents\GitHub\tika
+BootClassPathSupported : false
+
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:342)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:324)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:220)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:181)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:79)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:169)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:166)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:106)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:74)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:121)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:267)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:179)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:1017)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:299)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:219)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:104)
+    at java.lang.reflect.Method.invoke (Method.java:565)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:362)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+Caused by: org.apache.maven.plugin.PluginExecutionException: Execution default-cli of goal org.pitest:pitest-maven:1.19.5:mutationCoverage failed: Please check you have correctly installed the pitest plugin for your project's test library (JUnit 5, TestNG, JUnit 4 etc). 
+
+Please copy and paste the information and the complete stacktrace below when reporting an issue
+VM : OpenJDK 64-Bit Server VM
+Vendor : Eclipse Adoptium
+Version : 25.0.4.1+1-LTS
+Uptime : 7952
+Input -> 
+ 1 : --enable-native-access=ALL-UNNAMED
+ 2 : -Dclassworlds.conf=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\bin\m2.conf
+ 3 : -Dmaven.home=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0
+ 4 : -Dlibrary.jline.path=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\lib\jline-native
+ 5 : -Dorg.jline.terminal.exec.redirectPipeCreationMode=native,reflection
+ 6 : -Dmaven.multiModuleProjectDirectory=C:\Users\HP\Documents\GitHub\tika
+BootClassPathSupported : false
+
+
+Please copy and paste the information and the complete stacktrace below when reporting an issue
+VM : OpenJDK 64-Bit Server VM
+Vendor : Eclipse Adoptium
+Version : 25.0.4.1+1-LTS
+Uptime : 7955
+Input -> 
+ 1 : --enable-native-access=ALL-UNNAMED
+ 2 : -Dclassworlds.conf=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\bin\m2.conf
+ 3 : -Dmaven.home=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0
+ 4 : -Dlibrary.jline.path=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\lib\jline-native
+ 5 : -Dorg.jline.terminal.exec.redirectPipeCreationMode=native,reflection
+ 6 : -Dmaven.multiModuleProjectDirectory=C:\Users\HP\Documents\GitHub\tika
+BootClassPathSupported : false
+
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:134)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:336)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:324)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:220)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:181)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:79)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:169)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:166)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:106)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:74)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:121)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:267)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:179)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:1017)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:299)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:219)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:104)
+    at java.lang.reflect.Method.invoke (Method.java:565)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:362)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+Caused by: org.pitest.util.PitError: Please check you have correctly installed the pitest plugin for your project's test library (JUnit 5, TestNG, JUnit 4 etc). 
+
+Please copy and paste the information and the complete stacktrace below when reporting an issue
+VM : OpenJDK 64-Bit Server VM
+Vendor : Eclipse Adoptium
+Version : 25.0.4.1+1-LTS
+Uptime : 7952
+Input -> 
+ 1 : --enable-native-access=ALL-UNNAMED
+ 2 : -Dclassworlds.conf=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\bin\m2.conf
+ 3 : -Dmaven.home=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0
+ 4 : -Dlibrary.jline.path=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\lib\jline-native
+ 5 : -Dorg.jline.terminal.exec.redirectPipeCreationMode=native,reflection
+ 6 : -Dmaven.multiModuleProjectDirectory=C:\Users\HP\Documents\GitHub\tika
+BootClassPathSupported : false
+
+
+Please copy and paste the information and the complete stacktrace below when reporting an issue
+VM : OpenJDK 64-Bit Server VM
+Vendor : Eclipse Adoptium
+Version : 25.0.4.1+1-LTS
+Uptime : 7955
+Input -> 
+ 1 : --enable-native-access=ALL-UNNAMED
+ 2 : -Dclassworlds.conf=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\bin\m2.conf
+ 3 : -Dmaven.home=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0
+ 4 : -Dlibrary.jline.path=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\lib\jline-native
+ 5 : -Dorg.jline.terminal.exec.redirectPipeCreationMode=native,reflection
+ 6 : -Dmaven.multiModuleProjectDirectory=C:\Users\HP\Documents\GitHub\tika
+BootClassPathSupported : false
+
+    at org.pitest.util.Unchecked.translateCheckedException (Unchecked.java:20)
+    at org.pitest.coverage.execute.DefaultCoverageGenerator.calculateCoverage (DefaultCoverageGenerator.java:118)
+    at org.pitest.coverage.execute.DefaultCoverageGenerator.calculateCoverage (DefaultCoverageGenerator.java:53)
+    at org.pitest.mutationtest.tooling.MutationCoverage.runAnalysis (MutationCoverage.java:158)
+    at org.pitest.mutationtest.tooling.MutationCoverage.runReport (MutationCoverage.java:145)
+    at org.pitest.mutationtest.tooling.EntryPoint.execute (EntryPoint.java:137)
+    at org.pitest.mutationtest.tooling.EntryPoint.execute (EntryPoint.java:64)
+    at org.pitest.maven.RunPitStrategy.execute (RunPitStrategy.java:35)
+    at org.pitest.maven.PitMojo.analyse (PitMojo.java:581)
+    at org.pitest.maven.PitMojo.execute (PitMojo.java:485)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:127)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:336)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:324)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:220)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:181)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:79)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:169)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:166)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:106)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:74)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:121)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:267)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:179)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:1017)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:299)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:219)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:104)
+    at java.lang.reflect.Method.invoke (Method.java:565)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:362)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+Caused by: org.pitest.util.PitError: Please check you have correctly installed the pitest plugin for your project's test library (JUnit 5, TestNG, JUnit 4 etc). 
+
+Please copy and paste the information and the complete stacktrace below when reporting an issue
+VM : OpenJDK 64-Bit Server VM
+Vendor : Eclipse Adoptium
+Version : 25.0.4.1+1-LTS
+Uptime : 7952
+Input -> 
+ 1 : --enable-native-access=ALL-UNNAMED
+ 2 : -Dclassworlds.conf=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\bin\m2.conf
+ 3 : -Dmaven.home=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0
+ 4 : -Dlibrary.jline.path=C:\Users\HP\Desktop\apache-maven-3.10.0-bin\apache-maven-3.10.0\lib\jline-native
+ 5 : -Dorg.jline.terminal.exec.redirectPipeCreationMode=native,reflection
+ 6 : -Dmaven.multiModuleProjectDirectory=C:\Users\HP\Documents\GitHub\tika
+BootClassPathSupported : false
+
+    at org.pitest.coverage.execute.DefaultCoverageGenerator.gatherCoverageData (DefaultCoverageGenerator.java:152)
+    at org.pitest.coverage.execute.DefaultCoverageGenerator.calculateCoverage (DefaultCoverageGenerator.java:101)
+    at org.pitest.coverage.execute.DefaultCoverageGenerator.calculateCoverage (DefaultCoverageGenerator.java:53)
+    at org.pitest.mutationtest.tooling.MutationCoverage.runAnalysis (MutationCoverage.java:158)
+    at org.pitest.mutationtest.tooling.MutationCoverage.runReport (MutationCoverage.java:145)
+    at org.pitest.mutationtest.tooling.EntryPoint.execute (EntryPoint.java:137)
+    at org.pitest.mutationtest.tooling.EntryPoint.execute (EntryPoint.java:64)
+    at org.pitest.maven.RunPitStrategy.execute (RunPitStrategy.java:35)
+    at org.pitest.maven.PitMojo.analyse (PitMojo.java:581)
+    at org.pitest.maven.PitMojo.execute (PitMojo.java:485)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:127)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:336)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:324)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:220)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:181)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:79)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:169)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:166)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:106)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:74)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:121)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:267)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:179)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:1017)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:299)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:219)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:104)
+    at java.lang.reflect.Method.invoke (Method.java:565)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:362)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+[ERROR] 
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginExecutionException
