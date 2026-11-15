@@ -21,6 +21,6 @@ public class RickrollDemoTest {
     @org.junit.jupiter.api.Test
     public void testFail() {
         org.junit.jupiter.api.Assertions.assertEquals(6, 7,
-                "Echec exprès pour declencher le rickroll :(");
+                "Echec expres pour declencher le rickroll :(");
     }
 }
