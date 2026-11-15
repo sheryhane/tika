@@ -1,0 +1,24 @@
+name : 'Rickroll fallback'
+description: 'Lors d'un echec d'un cas d'étude, on déclenche Rickroll'
+inputs:
+  message: 
+    description: 'Message a afficher'
+    required: false
+    default: 'Un test a echoue... mais voici quelque chose pour te remonter le moral.'
+runs:
+  using: 'composite'
+  steps:
+    - name: Rickroll
+      shell: bash
+      env:
+        MESSAGE: ${{ inputs.message }}
+      run: |
+        URL="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        echo "::error title=Rickrolled::$MESSAGE $URL"
+        {
+          echo "## Les tests ont echoues"
+          echo ""
+          echo "$MESSAGE"
+          echo ""
+          echo "[Cliquez ici pour voir le rapport detaille des tests]($URL)"
+        } >> "$GITHUB_STEP_SUMMARY"
