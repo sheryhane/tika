@@ -1,12 +1,12 @@
-name : 'Rickroll fallback'
-description: 'Lors d'un echec d'un cas d'étude, on déclenche Rickroll'
+name: Rickroll fallback
+description: Rickroll quand un test du cas etude echoue
 inputs:
-  message: 
-    description: 'Message a afficher'
+  message:
+    description: Message a afficher
     required: false
-    default: 'Un test a echoue... mais voici quelque chose pour te remonter le moral.'
+    default: Un test a echoue... voici quelque chose pour te remonter le moral
 runs:
-  using: 'composite'
+  using: composite
   steps:
     - name: Rickroll
       shell: bash
@@ -16,7 +16,7 @@ runs:
         URL="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
         echo "::error title=Rickrolled::$MESSAGE $URL"
         {
-          echo "## Les tests ont echoues"
+          echo "## Les tests ont echoue"
           echo ""
           echo "$MESSAGE"
           echo ""

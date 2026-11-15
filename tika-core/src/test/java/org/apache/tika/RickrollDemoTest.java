@@ -16,7 +16,7 @@
  */
 package org.apache.tika;
 
-public class RickrollTest {
+public class RickrollDemoTest {
 
     @org.junit.jupiter.api.Test
     public void testFail() {
