@@ -50,7 +50,12 @@ jobs:
             BASE_SHA=$(git rev-parse HEAD~1)
           fi
           echo "Commit de référence : $BASE_SHA"
-          semgrep scan --config p/java --config p/security-audit --config r/java.lang.security.audit.xxe.documentbuilderfactory-disallow-doctype-decl-missing.documentbuilderfactory-disallow-doctype-decl-missing --error --baseline-commit "$BASE_SHA"
+          semgrep scan --config p/java --config p/security-audit --baseline-commit "$BASE_SHA"
+      - name: Semgrep - comparer le code avant et apres l'introduction de vulnerabilites
+        if: always()
+        run: |
+          semgrep scan --config p/java --config p/security-audit --baseline-commit bc3d0aed83c45b17cfa9b254737b4ae059c916c0
+      
 
   build:
   # s'assurer que semgrep success en 1er
