@@ -18,6 +18,8 @@ package org.apache.tika.utils;
 
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -377,6 +379,21 @@ public class ProcessUtils {
         javax.xml.parsers.DocumentBuilder builder = dbfact.newDocumentBuilder();
         return builder.parse(input);
     }    
+
+    /**
+     * Loading an object by desializing it from a stream 
+     * @param input the stream containing the serialized object 
+     * @return the desialized object 
+     * @throws IOException failure of the reading of the input 
+     * @throws ClassNotFoundException 
+     *
+     */
+    public static Object deserializeObject(InputStream input) throws IOException , ClassNotFoundException {
+        ObjectInputStream obj = new ObjectInputStream(input);
+        return obj.readObject(); 
+        // ex : octets -> objet 
+
+    }
 
 
     

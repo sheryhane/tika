@@ -50,7 +50,7 @@ jobs:
             BASE_SHA=$(git rev-parse HEAD~1)
           fi
           echo "Commit de référence : $BASE_SHA"
-          semgrep scan --config p/java --config p/security-audit --error --baseline-commit "$BASE_SHA"
+          semgrep scan --config p/java --config p/security-audit --config r/java.lang.security.audit.xxe.documentbuilderfactory-disallow-doctype-decl-missing.documentbuilderfactory-disallow-doctype-decl-missing --error --baseline-commit "$BASE_SHA"
 
   build:
   # s'assurer que semgrep success en 1er
