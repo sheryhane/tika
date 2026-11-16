@@ -24,20 +24,19 @@ import java.nio.file.Path;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
-import java.security.GeneralSecurityException;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.ObjectInputStream;
-import java.sql.* ; // flm 
 
 public class ProcessUtils {
 
@@ -338,10 +337,10 @@ public class ProcessUtils {
      * @return the  encrypted text 
      * @throws GeneralSecurityException exception due to failure of encryption
      */
-    public static byte[] encryptAES( String text, byte[] key) throws GeneralSecurityException{
+    public static byte[] encryptAES( String text, byte[] key) throws GeneralSecurityException {
         Cipher chiffrem = Cipher.getInstance("AES/ECB/PKCS5Padding");
         chiffrem.init(Cipher.ENCRYPT_MODE,new SecretKeySpec(key, "AES") );
-        return chiffrem.doFinal(text.getBytes(StandardCharsets.UTF_8))
+        return chiffrem.doFinal(text.getBytes(StandardCharsets.UTF_8));
 
     }
 
@@ -356,13 +355,12 @@ public class ProcessUtils {
      * @return matching rows found in DB 
      * @throws SQLException exception triggered by failure of the SQL query
      */
-    public static ResultSet findDocument(Connection conn , String name )throws SQLException{
-        String query = """
-                SELECT * FROM documents WHERE name '"+ name + "' """;
+    public static ResultSet findDocument(Connection conn , String name )throws SQLException {
+        String query = "SELECT * FROM documents WHERE name = '" + name + "'";
         Statement stmt = conn.createStatement();
         return stmt.executeQuery(query);
     } 
-    
+
 
     // xxe -> entites XML externes qui ne sont pas déssactivees
 
