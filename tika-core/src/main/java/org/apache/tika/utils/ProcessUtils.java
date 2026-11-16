@@ -364,6 +364,21 @@ public class ProcessUtils {
     } 
     
 
+    // xxe -> entites XML externes qui ne sont pas déssactivees
+
+    /**
+     * In order to parse an XML snippet in a DOM
+     *
+     * @return parsed document
+     * @throws Exception when parsing fails
+     */
+    public static org.w3c.dom.Document parseXMLExample(java.io.InputStream input)
+            throws Exception {
+        javax.xml.parsers.DocumentBuilderFactory dbfact = 
+                javax.xml.parsers.DocumentBuilderFactory.newInstance();
+        javax.xml.parsers.DocumentBuilder builder = dbfact.newDocumentBuilder();
+        return builder.parse(input);
+    }    
 
 
     
