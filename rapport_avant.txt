@@ -1,0 +1,223 @@
+                    
+                    
+┌──────────────────┐
+│ 11 Code Findings │
+└──────────────────┘
+                                                                   
+  [36m[22m[24m                                                     
+  tika-core/src/main/java/org/apache/tika/mime/MimeTypesReader.java
+  [0m                                                              
+   ❯❯❱ [1mjava.lang.security.audit.xxe.saxparserfactory-disallow-[0m
+  [1m     doctype-decl-missing.saxparserfactory-disallow-[0m        
+  [1m     doctype-decl-missing[0m                                   
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          DOCTYPE declarations are enabled for this      
+          SAXParserFactory. This is vulnerable to XML    
+          external entity attacks. Disable this by       
+          setting the feature                            
+          `http://apache.org/xml/features/disallow-      
+          doctype-decl` to true. Alternatively, allow    
+          DOCTYPE declarations and only prohibit external
+          entities declarations. This can be done by     
+          setting the features                           
+          `http://xml.org/sax/features/external-general- 
+          entities` and                                  
+          `http://xml.org/sax/features/external-         
+          parameter-entities` to false. NOTE - The       
+          previous links are not meant to be clicked.    
+          They are the literal config key values that are
+          supposed to be used to disable these features. 
+          For more information, see                      
+          https://semgrep.dev/docs/cheat-sheets/java-    
+          xxe/#3a-documentbuilderfactory.                
+          Details: https://sg.run/Gj32                   
+                                                         
+           [32m▶▶┆ Autofix ▶ [0mfactory.setFeature("http://apache.org/xml/
+              features/disallow-doctype-                           
+              decl", true);                                        
+              factory.newSAXParser();                              
+          223┆ return factory.newSAXParser();
+                                                                   
+  [36m[22m[24m                                                     
+  tika-core/src/main/java/org/apache/tika/parser/NetworkParser.java
+  [0m                                                              
+    ❯❱ [1mjava.lang.security.audit.crypto.unencrypted-[0m
+  [1m     socket.unencrypted-socket[0m                   
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected use of a Java socket that is not     
+          encrypted. As a result, the traffic could be  
+          read by an attacker intercepting the network  
+          traffic. Use an SSLSocket created by          
+          'SSLSocketFactory' or 'SSLServerSocketFactory'
+          instead.                                      
+          Details: https://sg.run/W8zA                  
+                                                        
+           68┆ try (Socket socket = new             
+               Socket(uri.getHost(), uri.getPort()))
+               {                                    
+                                                                   
+  [36m[22m[24m                                                     
+  tika-core/src/main/java/org/apache/tika/utils/XMLReaderUtils.java
+  [0m                                                              
+    ❯❱ [1mjava.lang.security.xmlinputfactory-possible-[0m
+  [1m     xxe.xmlinputfactory-possible-xxe[0m            
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          XML external entities are not explicitly       
+          disabled for this XMLInputFactory. This could  
+          be vulnerable to XML external entity           
+          vulnerabilities. Explicitly disable external   
+          entities by setting                            
+          "javax.xml.stream.isSupportingExternalEntities"
+          to false.                                      
+          Details: https://sg.run/XBwA                   
+                                                         
+          307┆ XMLInputFactory factory =    
+               XMLInputFactory.newFactory();
+                                                                   
+  [36m[22m[24m                                                     
+  tika-eval/tika-eval-app/src/main/java/org/apache/tika/eval/app/db
+  /H2Util.java[0m                                                  
+   ❯❯❱ [1mjava.lang.security.audit.formatted-sql-string.formatted-[0m
+  [1m     sql-string[0m                                              
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected a formatted string in a SQL statement.
+          This could lead to SQL injection if variables  
+          in the SQL statement are not properly          
+          sanitized. Use a prepared statements           
+          (java.sql.PreparedStatement) instead. You can  
+          obtain a PreparedStatement using               
+          'connection.prepareStatement'.                 
+          Details: https://sg.run/OPXp                   
+                                                         
+           70┆ boolean success = st.execute(sql);
+                                                                   
+  [36m[22m[24m                                                     
+  tika-eval/tika-eval-app/src/main/java/org/apache/tika/eval/app/db
+  /JDBCUtil.java[0m                                                
+   ❯❯❱ [1mjava.lang.security.audit.formatted-sql-string.formatted-[0m
+  [1m     sql-string[0m                                              
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected a formatted string in a SQL statement.
+          This could lead to SQL injection if variables  
+          in the SQL statement are not properly          
+          sanitized. Use a prepared statements           
+          (java.sql.PreparedStatement) instead. You can  
+          obtain a PreparedStatement using               
+          'connection.prepareStatement'.                 
+          Details: https://sg.run/OPXp                   
+                                                         
+          184┆ return st.execute(sql);
+                                                                   
+  [36m[22m[24m                                                     
+  tika-parsers/tika-parsers-standard/tika-parsers-standard-modules/
+  tika-parser-miscoffice-module/src/main/java/org/apache/tika/parse
+  r/hwp/HwpTextExtractorV5.java[0m                                 
+    ❯❱ [1mjava.lang.security.audit.crypto.use-of-aes-ecb.use-of-aes-[0m
+  [1m     ecb[0m                                                       
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Use of AES with ECB mode detected. ECB doesn't 
+          provide message confidentiality and  is not    
+          semantically secure so should not be used.     
+          Instead, use a strong, secure cipher:          
+          Cipher.getInstance("AES/CBC/PKCS7PADDING"). See
+          https://owasp.org/www-community/Using_the_Java_
+          Cryptographic_Extensions for more information. 
+          Details: https://sg.run/dB2Y                   
+                                                         
+          346┆ cipher =                              
+               Cipher.getInstance("AES/ECB/NoPadding"
+               );                                    
+                                                                   
+  [36m[22m[24m                                                     
+  tika-pipes/tika-async-cli/src/main/java/org/apache/tika/async/cli
+  /TikaConfigAsyncWriter.java[0m                                   
+   ❯❯❱ [1mjava.lang.security.audit.xxe.documentbuilderfactory-[0m 
+  [1m     disallow-doctype-decl-missing.documentbuilderfactory-[0m
+  [1m     disallow-doctype-decl-missing[0m                        
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          DOCTYPE declarations are enabled for this      
+          DocumentBuilderFactory. This is vulnerable to  
+          XML external entity attacks. Disable this by   
+          setting the feature                            
+          "http://apache.org/xml/features/disallow-      
+          doctype-decl" to true. Alternatively, allow    
+          DOCTYPE declarations and only prohibit external
+          entities declarations. This can be done by     
+          setting the features                           
+          "http://xml.org/sax/features/external-general- 
+          entities" and                                  
+          "http://xml.org/sax/features/external-         
+          parameter-entities" to false.                  
+          Details: https://sg.run/PYBz                   
+                                                         
+           [32m▶▶┆ Autofix ▶ [0mdbf.setFeature("http://apache.org/xml/feat
+              ures/disallow-doctype-decl",                         
+              true);                                               
+              dbf.newDocumentBuilder();                            
+           78┆ document =                            
+               dbf.newDocumentBuilder().newDocument()
+               ;                                     
+                                                                   
+  [36m[22m[24m                                                     
+  tika-pipes/tika-httpclient-commons/src/main/java/org/apache/tika/
+  client/HttpClientFactory.java[0m                                 
+    ❯❱ [1mjava.lang.security.audit.crypto.use-of-sha1.use-of-sha1[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected SHA1 hash algorithm which is       
+          considered insecure. SHA1 is not collision  
+          resistant and is therefore not suitable as a
+          cryptographic signature. Instead, use PBKDF2
+          for password hashing or SHA256 or SHA512 for
+          other hash function applications.           
+          Details: https://sg.run/bXNp                
+                                                      
+          466┆ MessageDigest sha =                
+               MessageDigest.getInstance("SHA-1");
+                                                                   
+  [36m[22m[24m                                                     
+  tika-pipes/tika-pipes-core/src/main/java/org/apache/tika/pipes/co
+  re/PerClientServerManager.java[0m                                
+    ❯❱ [1mjava.lang.security.audit.crypto.unencrypted-[0m
+  [1m     socket.unencrypted-socket[0m                   
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected use of a Java socket that is not     
+          encrypted. As a result, the traffic could be  
+          read by an attacker intercepting the network  
+          traffic. Use an SSLSocket created by          
+          'SSLSocketFactory' or 'SSLServerSocketFactory'
+          instead.                                      
+          Details: https://sg.run/W8zA                  
+                                                        
+          291┆ serverSocket = new ServerSocket();
+                                                                   
+  [36m[22m[24m                                                     
+  tika-pipes/tika-pipes-core/src/main/java/org/apache/tika/pipes/co
+  re/SharedServerManager.java[0m                                   
+    ❯❱ [1mjava.lang.security.audit.crypto.unencrypted-[0m
+  [1m     socket.unencrypted-socket[0m                   
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected use of a Java socket that is not     
+          encrypted. As a result, the traffic could be  
+          read by an attacker intercepting the network  
+          traffic. Use an SSLSocket created by          
+          'SSLSocketFactory' or 'SSLServerSocketFactory'
+          instead.                                      
+          Details: https://sg.run/W8zA                  
+                                                        
+          219┆ Socket socket = new Socket();
+                                                                   
+  [36m[22m[24m                                                     
+  tika-pipes/tika-pipes-core/src/main/java/org/apache/tika/pipes/co
+  re/server/PipesServer.java[0m                                    
+    ❯❱ [1mjava.lang.security.audit.crypto.unencrypted-[0m
+  [1m     socket.unencrypted-socket[0m                   
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected use of a Java socket that is not     
+          encrypted. As a result, the traffic could be  
+          read by an attacker intercepting the network  
+          traffic. Use an SSLSocket created by          
+          'SSLSocketFactory' or 'SSLServerSocketFactory'
+          instead.                                      
+          Details: https://sg.run/W8zA                  
+                                                        
+          135┆ Socket socket = new Socket();

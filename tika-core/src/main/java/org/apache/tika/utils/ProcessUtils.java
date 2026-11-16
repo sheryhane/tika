@@ -18,8 +18,11 @@ package org.apache.tika.utils;
 
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -293,4 +296,29 @@ public class ProcessUtils {
         }
     }
 
+
+
+
+    // tester si semgrep detecte les failles 
+
+
+
+    /**
+     * 1- WEak cryppto test
+     * Hashes a text with MD5
+     * @param text the text to hash 
+     * @return the MD5 hash (16octets)
+     * @throws NoSuchAlgorithmException if MD5 isn't available
+     */
+    public static byte[] hashText(String text) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        return md.digest(text.getBytes(StandardCharsets.UTF_8));
+    }
+
+
+
+
+
+
+    
 }
