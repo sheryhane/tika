@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
@@ -30,6 +31,12 @@ import java.util.concurrent.TimeoutException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+
+import java.security.GeneralSecurityException;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
 
 public class ProcessUtils {
 
@@ -303,6 +310,7 @@ public class ProcessUtils {
 
 
 
+    
     /**
      * 1- WEak cryppto test
      * Hashes a text with MD5
@@ -310,10 +318,25 @@ public class ProcessUtils {
      * @return the MD5 hash (16octets)
      * @throws NoSuchAlgorithmException if MD5 isn't available
      */
-    public static byte[] hashText(String text) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        return md.digest(text.getBytes(StandardCharsets.UTF_8));
+    // public static byte[] hashText(String text) throws NoSuchAlgorithmException {
+    //     MessageDigest md = MessageDigest.getInstance("MD5");
+    //     return md.digest(text.getBytes(StandardCharsets.UTF_8));
+    // } 
+    
+
+
+
+    // aes -> ECB electronic codebook mode (est le default )
+    // collisions de results 
+
+    public static byte[] encryptAES( String text, byte[] key) throws GeneralSecurityException{
+        Cipher chiffrem = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        chiffrem.init(Cipher.ENCRYPT_MODE,new SecretKeySpec(key, "AES") );
+        return chiffrem.doFinal(text.getBytes(StandardCharsets.UTF_8))
+
     }
+
+
 
 
 
