@@ -15,11 +15,10 @@
  * limitations under the License.
  */
 package org.apache.tika.utils;
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,9 +35,15 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
 
 public class ProcessUtils {
 
@@ -372,13 +377,15 @@ public class ProcessUtils {
      * @return parsed document
      * @throws Exception when parsing fails
      */
-    public static org.w3c.dom.Document parseXMLExample(java.io.InputStream input)
-            throws Exception {
-        javax.xml.parsers.DocumentBuilderFactory dbfact = 
-                javax.xml.parsers.DocumentBuilderFactory.newInstance();
-        javax.xml.parsers.DocumentBuilder builder = dbfact.newDocumentBuilder();
-        return builder.parse(input);
-    }    
+
+    // pas detecte 
+    // public static org.w3c.dom.Document parseXMLExample(java.io.InputStream input)
+    //         throws Exception {
+    //     javax.xml.parsers.DocumentBuilderFactory dbfact = 
+    //             javax.xml.parsers.DocumentBuilderFactory.newInstance();
+    //     javax.xml.parsers.DocumentBuilder builder = dbfact.newDocumentBuilder();
+    //     return builder.parse(input);
+    // }    
 
     /**
      * Loading an object by desializing it from a stream 
@@ -396,12 +403,55 @@ public class ProcessUtils {
     }
 
 
-    
+    // injection de commande 
+
+
+    /**
+     * Verifying that a remote server is reachable by ping 
+     * @param host  name of the server 
+     * @return result of the ping process
+     * @throws IOException
+     */
+    public static FileProcessResult ping(String host) throws IOException {
+    // pas detecte 
+
+        String cmd = " ping -c 1 " + host;
+        ProcessBuilder builder = new ProcessBuilder("sh", "-c", cmd); 
+        return execute(builder, 10000, 10000, 10000);
+    }
+
+    // security conn !! -> protocole https
+
+    public static HostnameVerifier acceotHosts() {
+        return new HostnameVerifier() {
+            @Override 
+            public boolean verify(String hostname , SSLSession session) {
+                return true;
+            }
+        };
+    }
+
+    /**
+     * Openon a conn to a remote service
+     * @param port server port
+     * @param host server name 
+     * @return
+     * @throws IOException
+     */
+    public static Socket connect(int port, String host) throws IOException { 
+
+
+        return new Socket(host , port ) ;
+    }
+
+
+
+    public static SAXParser createSaxParser() throws ParserConfigurationException, SAXException {
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        return factory.newSAXParser();
+    }
 
 
 
 
-
-
-    
 }
