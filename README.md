@@ -107,7 +107,14 @@ On a lancé Semgrep sur tout le dépôt, avec les mêmes règles que la CI : une
 
 Les 8 nouvelles alertes correspondent exactement aux 7 failles (la faille 2 compte deux fois). Les 19 alertes d'avant existaient déjà et ne font pas échouer la CI grâce à la baseline.
 
-## 6. Humour : rickroll (pas drôle btw)
+## 6. Ce que Semgrep n’a pas trouvé
+On a essayé deux failles que la CI n’a pas été en mesure de détecter et on a décidé de les laisser dans le fichier parce qu’elle démontre les limites de Semgrep :
+-**XXE avec ‘DocumentBuilderFactory** : elle est détectée avec les règles payantes (pro) mais invisible en CI sans compte. Donc le même outil ne donne pas le même résultat.
+-**Injection de commande** : ‘host’ est concaténé dans une commande shell. Les règles d’injection gratuites ne se déclenchent que si elle voient l’origine de la donnée (par exemple : requête web). Or, ici elle n’est pas détectée vu que c’est un simple paramètre.
+Donc semgrep detecte des erreurs mais il ne remplace ni les test ni une relecture humaine.
+
+
+## 7. Humour : rickroll (pas drôle btw)
 
 On a créé une action réutilisable (`.github/actions/rickroll`), appelée à la fin de `build` et `e2e-tests` si l'étape Maven a échoué :
 
